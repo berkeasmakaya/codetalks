@@ -8,6 +8,8 @@ export default function(errorCode){
             return "Kullanıcı Bulunamadı"
         case "auth/email-already-in-use":
             return "E-Mail Zaten Kullanımda"
+        case "auth/invalid-credential":
+            return "e-posta veya şifreniz yanlış"
         default:
             return errorCode;
     }

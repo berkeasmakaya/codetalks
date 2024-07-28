@@ -29,7 +29,7 @@ function Login({navigation}) {
     }
 
     async function handleFormSubmit(formValues) {
-        useState(true);
+        setLoading(true);
         try {
             await auth().signInWithEmailAndPassword(
                 formValues.usermail,
@@ -41,7 +41,7 @@ function Login({navigation}) {
                 message:authErrorMessageParser(error.code),
                 type:"danger"
             })
-            console.log(error)
+            setLoading(false)
         }
     }
 
@@ -71,7 +71,7 @@ function Login({navigation}) {
                         {touched.password && errors.password && <Text style={styles.error}>{errors.password}</Text>}
                     </View>
                     <View style={styles.button_container}>
-                        <Button text="Giriş Yap" onPress={handleSubmit}/>
+                        <Button text="Giriş Yap" onPress={handleSubmit} loading={loading}/>
                         <Button text="Kayıt Ol" theme="secondary" onPress={goToRegisterPage}/>
                     </View>
                     </>

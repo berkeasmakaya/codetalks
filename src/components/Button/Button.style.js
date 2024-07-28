@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 const base_style = StyleSheet.create({
     container:{
         borderRadius:10,
-        margin:15,
-        padding:20,
+        margin:10,
+        padding:10,
         alignItems:"center",
     },
     text:{

@@ -46,7 +46,7 @@ function Register({navigation}) {
                 message:authErrorMessageParser(error.code),
                 type:"danger"
             })
-            console.log(error)
+            setLoading(false)
         }
     }
 

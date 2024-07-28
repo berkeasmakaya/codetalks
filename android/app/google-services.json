@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "984164454047",
-    "project_id": "codetalks-989b3",
-    "storage_bucket": "codetalks-989b3.appspot.com"
+    "project_number": "136666103913",
+    "firebase_url": "https://codetalks-65781-default-rtdb.firebaseio.com",
+    "project_id": "codetalks-65781",
+    "storage_bucket": "codetalks-65781.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:984164454047:android:8c542176f30d2771eddcaa",
+        "mobilesdk_app_id": "1:136666103913:android:18cafb8eff9c0b271fa2f8",
         "android_client_info": {
           "package_name": "com.codetalks"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCXmFjZElP-_Kug9QxMUfWy6kKFY_XX57I"
+          "current_key": "AIzaSyAOb5_2_jOlLwm2qq6kVBPRkPTjBrIuH0w"
         }
       ],
       "services": {

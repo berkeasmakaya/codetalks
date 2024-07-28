@@ -5,7 +5,9 @@ import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import FlashMessage from "react-native-flash-message";
 import auth from '@react-native-firebase/auth'
-import Rooms from "./pages/Rooms/Rooms";
+import Channels from "./pages/Channels/Channels";
+import Chatting from "./pages/Chatting/Chatting";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const Stack = createNativeStackNavigator(); 
@@ -28,16 +30,49 @@ function App() {
       </Stack.Navigator>
     )
   }
+  const AppStack = () => {
+    return(
+      <Stack.Navigator>
+        <Stack.Screen 
+            name="ChannelsPage" 
+            component={Channels} 
+            options={{
+              headerTitle:"Odalar", 
+              headerTintColor:"#fea74d", 
+              headerTitleAlign:"center", 
+              headerRight: () => <Icon 
+                  name="logout" 
+                  size={30} 
+                  color="#fea344" 
+                  onPress={()=> auth().signOut()} 
+                />
+          }}/>
+        <Stack.Screen 
+          name="ChatPage" 
+          component={Chatting} 
+          options={{
+            headerTintColor:"#ffb266", 
+            headerTitleAlign:"center",
+            headerRight: () => <Icon 
+                name="logout" 
+                size={30} 
+                color="#fea344"  
+                onPress={()=> auth().signOut()} 
+              />
+          }}/>
+    </Stack.Navigator>
+    )
+    
+  }
 
   return(
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator>  
         {!userSession ? (
          <Stack.Screen name="AuthStack" component={AuthStack} options={{headerShown:false}}/> 
         ):(
-          <Stack.Screen name="RoomsPage" component={Rooms}/>
-        )}
-        
+          <Stack.Screen name="AppStack" component={AppStack} options={{headerShown:false}}/>
+        )}   
       </Stack.Navigator>
       <FlashMessage position="top"/>
     </NavigationContainer>
