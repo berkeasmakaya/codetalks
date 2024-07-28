@@ -1,16 +1,16 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import styles from './ChatCard.style';
 import { formatDistance, parseISO } from "date-fns";
 import { tr } from "date-fns/locale";
 
-const ChatCard = ({data}) => {
+const ChatCard = ({data, onLongPress}) => {
     const formattedDate = formatDistance(parseISO(data.date), new Date(), {
         addSuffix:true,
         locale:tr,
     });
     return(
-        <View style={styles.container}>
+        <TouchableOpacity onLongPress={onLongPress} style={styles.container}>
             <View style={styles.inner_container}>
                 <Text style={styles.user_text}>{data.user}</Text>
                 <Text style={styles.date_text}>{formattedDate}</Text>
@@ -18,7 +18,7 @@ const ChatCard = ({data}) => {
             <View style={styles.message_container}>
                 <Text style={styles.message_text}>{data.message}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

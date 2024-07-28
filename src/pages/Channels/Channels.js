@@ -1,4 +1,4 @@
-import { View, FlatList } from 'react-native'
+import { View, FlatList, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './Channels.style';
 import FloatingButton from '../../components/FloatingButton/FloatingButton';
@@ -11,6 +11,7 @@ import ChannelCard from '../../components/ChannelCard/ChannelCard';
 function Channels({navigation}){
   const [inputModalVisible, setInputModalVisible] = useState(false)
   const [channelList, setChannelList] = useState([]);
+  const currentUser = auth().currentUser;
 
   useEffect(()=>{
     database().ref('/channels')
@@ -18,7 +19,6 @@ function Channels({navigation}){
       const contentData = snapshot.val();
       const parsedData = parseContentData(contentData || {})
       setChannelList(parsedData)
-      //console.log(roomList)
     })
   },[])
 
@@ -36,7 +36,6 @@ function Channels({navigation}){
       date: new Date().toISOString(),
     };
     database().ref('/channels').push(contentObject)
-    console.log(contentObject)
   }
 
   function handleSendContent(content) {
@@ -48,7 +47,23 @@ function Channels({navigation}){
     navigation.navigate("ChatPage", {item})
   }
 
-  const renderChannels = ({item}) => <ChannelCard channel={item} onPress={()=>handleGoChat(item)}/>
+  const handleLongPress = (item) => {
+    if (item.user === currentUser.email.split('@')[0]) {
+          Alert.alert('Kanalı Sil', 'Bu Kanalı Silmek İstediğinizden Emin Misiniz ?',
+            [
+              {text:'İptal', style:'cancel'},
+              {text:'Sil', onPress: () => deleteMessage(item)}
+            ],
+            { cancelable: true }
+        )
+      }
+    }
+
+  const deleteMessage = (item) => {
+      database().ref(`channels/${item.id}`).remove();
+  }
+
+  const renderChannels = ({item}) => <ChannelCard channel={item} onPress={()=>handleGoChat(item)} onLongPress={()=>handleLongPress(item)}/>
 
   return (
     <View style={styles.container}>

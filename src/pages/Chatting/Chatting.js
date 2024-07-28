@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Alert } from "react-native";
 import ChatCard from "../../components/ChatCard/ChatCard";
 import styles from './Chatting.style'
 import parseContentData from "../../utils/parseContentData";
@@ -14,6 +14,7 @@ function Chatting({route, navigation}) {
     const channelId = item.id
     const [messagesList, setMessagesList] = useState([]);
     const [inputModalVisible, setInputModalVisible] = useState(false)
+    const currentUser = auth().currentUser;
 
     useEffect(()=>{
         navigation.setOptions({headerTitle:channelName})
@@ -46,7 +47,23 @@ function Chatting({route, navigation}) {
         sendContent(content)
       }
 
-    const renderMessages = ({item}) => <ChatCard data={item} />
+      const handleLongPress = (item) => {
+        if (item.user === currentUser.email.split('@')[0]) {
+              Alert.alert('Mesajı Sil', 'Bu Mesajı Silmek İstediğinizden Emin Misiniz ?',
+                [
+                  {text:'İptal', style:'cancel'},
+                  {text:'Sil', onPress: () => deleteMessage(item)}
+                ],
+                { cancelable: true }
+            )
+          }
+        }
+    
+      const deleteMessage = (item) => {
+          database().ref(`channels/${channelId}/messages/${item.id}`).remove();
+      }
+
+    const renderMessages = ({item}) => <ChatCard data={item} onLongPress={()=>handleLongPress(item)} />
     return(
         <View style={styles.container}>
             <View style={styles.inner_container}>
