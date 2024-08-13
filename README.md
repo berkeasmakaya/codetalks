@@ -28,12 +28,12 @@ codetalks is a mobile application developed using React Native. The app focuses 
 
 ## Screenshots
 
-![LoginPage](screenshots/login.png)
-![RegisterPage](screenshots/register.png)
-![Channle](screenshots/channels.png)
-![AddChannel](screenshots/addChannel.png)
-![DeleteChannel](screenshots/deleteChannel.png)
-![Messaging](screenshots/messaging.png)
-![SendMessage](screenshots/sendMessage.png)
-![Message](screenshots/message.png)
-![DeleteMessage](screenshots/deleteMessage.png)
+![LoginPage](android/screenshots/login.png)
+![RegisterPage](android/screenshots/register.png)
+![Channel](android/screenshots/channels.png)
+![AddChannel](android/screenshots/addChannel.png)
+![DeleteChannel](android/screenshots/deleteChannel.png)
+![Messaging](android/screenshots/messaging.png)
+![SendMessage](android/screenshots/sendMessage.png)
+![Message](android/screenshots/message.png)
+![DeleteMessage](android/screenshots/deleteMessage.png)
